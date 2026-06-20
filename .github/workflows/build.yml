@@ -29,6 +29,11 @@ jobs:
         with:
           node-version: '20'
 
+      # ffmpeg нужен генератору для постеров новых видео (первый кадр).
+      # Без него новые видео-карточки падают на фолбэк-плитку «▶ Видео».
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
       - name: Generate blog + sitemap from Supabase
         env:
           # anon-ключ публичен по дизайну; можно переопределить repo variable SUPABASE_ANON_KEY
