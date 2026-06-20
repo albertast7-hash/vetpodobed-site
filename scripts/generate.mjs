@@ -61,6 +61,11 @@ function metaDesc(post) {
   const raw = post.summary || stripHtml(post.content_html);
   return esc(raw.slice(0, 200).trim());
 }
+// media_url может быть КАРТИНКОЙ или ВИДЕО (в БД 65/84 — это .mp4).
+function isVideo(u) { return /\.(mp4|mov|webm|m4v|ogv)$/i.test(u || ''); }
+function isImage(u) { return /\.(jpe?g|png|webp|gif|avif|svg)$/i.test(u || ''); }
+// OG/Schema-картинка — только если media реально картинка (не видео).
+function ogImageOf(p) { return isImage(p.media_url) ? p.media_url : null; }
 
 // --- Данные ---------------------------------------------------------------
 // Берём статьи через SECURITY DEFINER RPC get_public_posts() — она отдаёт anon-ключу
@@ -137,10 +142,11 @@ function articlePage(post, all) {
   const canonical = `${SITE_URL}/blog/${slug}.html`;
   const desc = metaDesc(post);
   const date = post.published_at || post.created_at;
+  const ogImage = ogImageOf(post);
   const jsonld = {
     '@context': 'https://schema.org', '@type': 'Article',
     headline: post.title, description: stripHtml(post.summary || '').slice(0, 200) || undefined,
-    image: post.media_url || undefined, datePublished: date || undefined,
+    image: ogImage || undefined, datePublished: date || undefined,
     author: { '@type': 'Person', name: AUTHOR },
     publisher: { '@type': 'Organization', name: SITE_NAME, logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/logo.png` } },
     mainEntityOfPage: canonical, inLanguage: 'ru-RU'
@@ -157,7 +163,12 @@ function articlePage(post, all) {
     }).join('');
     seriesNav = `<aside class="series-nav"><div class="series-title">Серия: ${esc(post.series_title)}</div><ol>${items}</ol></aside>`;
   }
-  const cover = post.media_url ? `<img class="article-cover" src="${esc(post.media_url)}" alt="${esc(post.title)}" loading="lazy">` : '';
+  let cover = '';
+  if (isVideo(post.media_url)) {
+    cover = `<video class="article-cover" src="${esc(post.media_url)}" controls preload="metadata" playsinline></video>`;
+  } else if (isImage(post.media_url)) {
+    cover = `<img class="article-cover" src="${esc(post.media_url)}" alt="${esc(post.title)}" loading="lazy">`;
+  }
   const body = `
   <article class="article">
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>${esc(post.title)}</span></nav>
@@ -171,14 +182,22 @@ function articlePage(post, all) {
       <a class="cta" href="${APP_URL}">Задать вопрос врачу в приложении →</a>
     </div>
   </article>`;
-  return shell({ title: `${post.title} — VetPodobed`, desc, canonical, ogImage: post.media_url, jsonld, body, ogType: 'article' });
+  return shell({ title: `${post.title} — VetPodobed`, desc, canonical, ogImage, jsonld, body, ogType: 'article' });
 }
 
 function blogIndex(all) {
   const cards = all.map(p => {
     const slug = postSlug(p);
     const date = p.published_at || p.created_at;
-    const img = p.media_url ? `<img src="${esc(p.media_url)}" alt="" loading="lazy">` : '<div class="card-noimg">🐾</div>';
+    let img;
+    if (isVideo(p.media_url)) {
+      // Видео в карточке — превью по первому кадру (#t=0.1), с бейджем ▶.
+      img = `<div class="card-media"><video src="${esc(p.media_url)}#t=0.1" muted preload="metadata" playsinline></video><span class="play-badge">▶</span></div>`;
+    } else if (isImage(p.media_url)) {
+      img = `<img src="${esc(p.media_url)}" alt="" loading="lazy">`;
+    } else {
+      img = '<div class="card-noimg">🐾</div>';
+    }
     return `<a class="post-card" href="/blog/${slug}.html">
       ${img}
       <div class="card-body">
