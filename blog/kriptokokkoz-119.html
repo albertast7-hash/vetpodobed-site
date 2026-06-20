@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Криптококкоз — VetPodobed">
 <meta name="twitter:description" content="Криптококки — это микроскопические дрожжеподобные грибы, распространённые по всему миру. Один исследователь назвал их «a sugar-coated killer with designer genes», то есть «убийцами с дизайнерским гено">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Криптококкоз","description":"Криптококки — это микроскопические дрожжеподобные грибы, распространённые по всему миру. Один исследователь назвал их «a sugar-coated killer with designer genes», то есть «убийцами с дизайнерским гено","datePublished":"2026-03-30T11:24:52.614273+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/kriptokokkoz-119.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Криптококкоз</span></nav>
     <h1>Криптококкоз</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774880066812-s5ehcm.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774880066812-s5ehcm.mp4" poster="/assets/posters/1774880066812-s5ehcm.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://pub-da3a607cc3d643ffaa67028e564144f3.r2.dev/RGx9PSJ5Qv4kpbTo-1773327599920.mp4"></a>Криптококки — это микроскопические дрожжеподобные грибы, распространённые по всему миру. Один исследователь назвал их «a sugar-coated killer with designer genes», то есть «убийцами с дизайнерским геномом в сахарной скорлупе», подразумевая их замечательную способность избегать\подавлять иммунные атаки организма-хозяина, ну и значительное количество полисахаридов в капсуле.<br>
 <br>
 Несмотря на широкую распространённость возбудителя, заболеваемость криптококкозом имеет скорее спорадический характер (разовые случаи, редко — вспышки). Основной источник заразы — голуби, вернее, голубиный помёт, в том числе высушенный до порошка, поэтому, к сожалению, заболевают в том числе животные, не покидающие пределов квартиры (если в квартире открывают хоть иногда окно).<br>
@@ -73,5 +73,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

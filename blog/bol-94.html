@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Боль
 Разговор о боли и аналгезии (обезболивании) у кошек и собак я чаще всего начинаю со старого анекдота: приходит ветеринар к медику, медик спрашивает: «Что у Вас болит?», а ветеринар в ответ: «Нет,">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Боль","description":"Боль Разговор о боли и аналгезии (обезболивании) у кошек и собак я чаще всего начинаю со старого анекдота: приходит ветеринар к медику, медик спрашивает: «Что у Вас болит?», а ветеринар в ответ: «Нет,","datePublished":"2026-03-30T11:24:35.643963+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/bol-94.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -38,7 +38,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Боль</span></nav>
     <h1>Боль</h1>
     <div class="article-meta"><span class="tag">симптомы</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775496600684-msptz1.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775496600684-msptz1.mp4" poster="/assets/posters/1775496600684-msptz1.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://pub-da3a607cc3d643ffaa67028e564144f3.r2.dev/pHcP3Aja6YmUHhNG-1745925167089.mp4"></a>Боль<br>
 Разговор о боли и аналгезии (обезболивании) у кошек и собак я чаще всего начинаю со старого анекдота: приходит ветеринар к медику, медик спрашивает: «Что у Вас болит?», а ветеринар в ответ: «Нет, ну так каждый может!». К сожалению, серьёзно задумываться о теме боли ветеринары начали относительно недавно, и исследования проводить непросто по всё той же причине — наши пациенты не говорят и не могут описать свои ощущения.<br>
 <br>
@@ -79,5 +79,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

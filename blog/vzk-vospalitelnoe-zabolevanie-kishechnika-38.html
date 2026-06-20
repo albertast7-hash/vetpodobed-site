@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Название, честно говоря, довольно слабо отражает суть заболевания, поэтому лично я предпочитаю формулировку «инфильтративный гастроэнтероколит». 
 Инфильтративный — потому что на гистологии мы увидим и">
 <meta name="twitter:image" content="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978659165-i5pqp7.jpg">
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ВЗК — воспалительное заболевание кишечника","description":"Название, честно говоря, довольно слабо отражает суть заболевания, поэтому лично я предпочитаю формулировку «инфильтративный гастроэнтероколит». Инфильтративный — потому что на гистологии мы увидим ин","image":"https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978659165-i5pqp7.jpg","datePublished":"2026-03-30T11:23:49.603642+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/vzk-vospalitelnoe-zabolevanie-kishechnika-38.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -81,5 +81,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

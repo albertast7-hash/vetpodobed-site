@@ -24,7 +24,7 @@
 
 Сразу скажу, что возможностей у нас очень немного (катастрофически мало по ср">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Заболевания новорожденных","description":"В прошлом посте мы поговорили про уход за здоровыми новорожденными, теперь попробуем обсудить новорожденных с проблемами… Сразу скажу, что возможностей у нас очень немного (катастрофически мало по сра","datePublished":"2026-03-30T11:24:40.007219+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/zabolevaniya-novorozhdennyh-101.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Заболевания новорожденных</span></nav>
     <h1>Заболевания новорожденных</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774975686977-xx95q1.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774975686977-xx95q1.mp4" poster="/assets/posters/1774975686977-xx95q1.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://pub-da3a607cc3d643ffaa67028e564144f3.r2.dev/sXaOtO2zBnnBvJrC-1763815226731.mp4"></a><b>В прошлом посте мы поговорили про уход за здоровыми новорожденными, теперь попробуем обсудить новорожденных с проблемами…</b><br>
 <br>
 Сразу скажу, что возможностей у нас очень немного (катастрофически мало по сравнению с диагностикой и лечением взрослых). Даже взять анализ крови у новорожденного щенка\котёнка мы можем только из яремной вены (при рождении — ещё из пупочной) и, будем честны, это умеет отнюдь не каждый ветеринар. Не проще и с лечением: восполнение жидкости, как правило, проводим перорально (выпаиванием) поскольку подкожное вливание малоэффективно (не очень хорошо всасывается оттуда водичка), а внутрикостное\внутривенное — очень сложно технически. Некоторое время назад подкожные вливания новорожденным вообще считались смертельно опасной процедурой; сейчас это считается скорее допустимым, хотя, повторюсь, малоэффективным методом.<br>
@@ -74,5 +74,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

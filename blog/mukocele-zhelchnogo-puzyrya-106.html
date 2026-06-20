@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Мукоцеле желчного пузыря — VetPodobed">
 <meta name="twitter:description" content="Я часто повторяю, что не все узисты одинаково полезны УЗИ диагностика – операторозависимый метод, то есть информативность исследования принципиально зависит от диагноста. Ну так вот, следующий пост на">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Мукоцеле желчного пузыря","description":"Я часто повторяю, что не все узисты одинаково полезны УЗИ диагностика – операторозависимый метод, то есть информативность исследования принципиально зависит от диагноста. Ну так вот, следующий пост на","datePublished":"2026-03-30T11:24:44.034609+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/mukocele-zhelchnogo-puzyrya-106.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Мукоцеле желчного пузыря</span></nav>
     <h1>Мукоцеле желчного пузыря</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774972552636-oig17b.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774972552636-oig17b.mp4" poster="/assets/posters/1774972552636-oig17b.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://pub-da3a607cc3d643ffaa67028e564144f3.r2.dev/FZqCufRiGNo5dzhS-1768058779708.mp4"></a>Я часто повторяю, что<s>&nbsp;не все узисты одинаково полезны</s>&nbsp;УЗИ диагностика – операторозависимый метод, то есть информативность исследования принципиально зависит от диагноста. Ну так вот, следующий пост написан по заказу моим любимым узистом, Дариной Груниной, а вот ссылка на её телеграм канал&nbsp;<a href="https://t.me/DariUZI">https://t.me/DariUZI</a><br><br>Мукоцеле желчного пузыря — потенциально жизнеугрожающее состояние, при котором в полости органа накапливается аномально густая, желеобразная слизь (муцин). Это приводит к значительному растяжению желчного пузыря (ЖП),нарушению его функции и высокому риску разрыва стенки с развитием желчного перитонита.<br>
 <br>
 Этиология заболевания считается многофакторной. В основе лежит гиперсекреция муцина эпителием на фоне кистозно-муцинозной гиперплазии, а также развитие бактериальной инфекции в ЖП. Слизь распределяется неравномерно, а накапливается концентрическими слоями, пока просвет желчного пузыря не заполняется затвердевшей слизью, нарушая кровообращение в стенке органа, что ведет к её воспалению (холециститу), ишемии, некрозу или обструкции желчных протоков и, в конечном итоге, к перфорации.<br>
@@ -73,5 +73,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

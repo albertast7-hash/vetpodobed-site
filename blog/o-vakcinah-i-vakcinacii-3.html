@@ -27,7 +27,7 @@
 — Чтобы зверушка не заболела вируснёй или заболела, но переболела легко  
 — Чтобы можно было вывезти питомца за рубеж">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"О вакцинах и вакцинации","description":"Поговорим о вакцинах и вакцинацииДля чего нужна вакцинация животных вообще? — Чтобы зверушка не заболела вируснёй или заболела, но переболела легко — Чтобы можно было вывезти питомца за рубеж Что еще ","datePublished":"2026-03-30T11:23:23.326728+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/o-vakcinah-i-vakcinacii-3.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -44,7 +44,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>О вакцинах и вакцинации</span></nav>
     <h1>О вакцинах и вакцинации</h1>
     <div class="article-meta"><span class="tag">профилактика</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775571359885-wtr06m.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775571359885-wtr06m.mp4" poster="/assets/posters/1775571359885-wtr06m.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><div><b>Поговорим о вакцинах и вакцинации</b></div><div><br></div><div><i>Для чего нужна вакцинация животных вообще? </i> </div>
   <br>
 — Чтобы зверушка не заболела вируснёй или заболела, но переболела легко  <br>
@@ -113,5 +113,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

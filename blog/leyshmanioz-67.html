@@ -24,7 +24,7 @@
 
 Когда юная лейшмания попадает в кровь, её немедленно опознают как в">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Лейшманиоз","description":"Лейшмании — гнусные паразитические простейшие, шатающиеся между собаками и москитами, периодически заражая кошек, кроликов и людей. Когда юная лейшмания попадает в кровь, её немедленно опознают как вр","datePublished":"2026-03-30T11:24:10.674683+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/leyshmanioz-67.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Лейшманиоз</span></nav>
     <h1>Лейшманиоз</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979710833-xj94on.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979710833-xj94on.mp4" poster="/assets/posters/1774979710833-xj94on.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/0dED27qxoMl4PqyC-1726221693700.mp4"></a><b>Лейшмании </b>— гнусные паразитические простейшие, шатающиеся между собаками и москитами, периодически заражая кошек, кроликов и людей.<br>
 <br>
 Когда юная лейшмания попадает в кровь, её немедленно опознают как врага и поедают макрофаги (клетки-киллеры иммунной системы), дальше я не совсем поняла как, но лейшмании обманывают макрофага и размножаются в нём, как будто это терновый куст дом родной. Наполненный паразитами макрофаг трагически лопается где-нибудь (в любой практически ткани или органе собаки), выбрасывая свой опасный груз. Разумеется, местные клетки иммунного ответа реагируют на появление выводка лейшманий активацией воспалительного протокола, но, к сожалению, зачастую воспаление разрушает ткани хозяина, никак не сказываясь на процветании паразитов (так происходит не всегда, спонтанное выздоровление также возможно).<br>
@@ -82,5 +82,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

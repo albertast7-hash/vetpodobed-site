@@ -27,7 +27,7 @@
 Эта история, кроме прочего, любопытна тем, что я в ней
 выступала в качестве владельца пациента и, скажу я вам, мне бы не хотелось, чтобы ко мне такие владельц">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Патрик","description":"Давно я не рассказывала историй болезни) Эта история, кроме прочего, любопытна тем, что я в ней выступала в качестве владельца пациента и, скажу я вам, мне бы не хотелось, чтобы ко мне такие владельцы","datePublished":"2026-05-23T10:19:11.295+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/patrik-134.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -44,7 +44,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Патрик</span></nav>
     <h1>Патрик</h1>
     <div class="article-meta"><span class="tag">диагностика</span><time>23 мая 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1779127879101-5rrj0c.MP4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1779127879101-5rrj0c.MP4" poster="/assets/posters/1779127879101-5rrj0c.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><p class="MsoNormal">Давно я не рассказывала историй болезни)</p>
 
 <p class="MsoNormal">Эта история, кроме прочего, любопытна тем, что я в ней
@@ -121,5 +121,18 @@ Aptos;mso-hansi-theme-font:minor-latin;mso-char-type:symbol-ext;mso-symbol-font-
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

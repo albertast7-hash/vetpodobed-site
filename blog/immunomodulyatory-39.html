@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Иммуномодуляторы — VetPodobed">
 <meta name="twitter:description" content="Давайте поговорим про группу препаратов, которые называют иммуномодуляторами или иммуностимуляторами, имея в виду и в том, и в другом случае некий «волшебный пендель», который заставит халтурящий имму">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Иммуномодуляторы","description":"Давайте поговорим про группу препаратов, которые называют иммуномодуляторами или иммуностимуляторами, имея в виду и в том, и в другом случае некий «волшебный пендель», который заставит халтурящий имму","datePublished":"2026-03-30T11:23:50.122328+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/immunomodulyatory-39.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Иммуномодуляторы</span></nav>
     <h1>Иммуномодуляторы</h1>
     <div class="article-meta"><span class="tag">препараты</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978735684-8387xi.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978735684-8387xi.mp4" poster="/assets/posters/1774978735684-8387xi.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/ybGYgA154lJ4OKGe-1708871305806.mp4"></a>Давайте поговорим про группу препаратов, которые называют иммуномодуляторами или иммуностимуляторами, имея в виду и в том, и в другом случае некий «волшебный пендель», который заставит халтурящий иммунитет взяться за ум.<br>
 <br>
 Любопытно, что в группу «иммуномодуляторов» попали препараты как с полностью недоказанным эффектом (т.н. фуфломицины), так и реально воздействующие на то или иное звено иммунитета. <br>
@@ -87,5 +87,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

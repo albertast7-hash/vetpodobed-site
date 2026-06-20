@@ -24,7 +24,7 @@
 
 Теоретически все проходили в школе, но я повторю на всякий случай, что гельминт">
 <meta name="twitter:image" content="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774974735501-avc90p.jpg">
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Обработки от глистов 🪱","description":"Существует уже некоторое количество обзоров имеющихся антигельминтиков, но информация зачастую противоречива и неточна. Теоретически все проходили в школе, но я повторю на всякий случай, что гельминты","image":"https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774974735501-avc90p.jpg","datePublished":"2026-03-30T11:23:28.513205+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/obrabotki-ot-glistov-10.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -128,5 +128,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

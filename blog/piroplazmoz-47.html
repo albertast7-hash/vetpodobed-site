@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Пироплазмоз — VetPodobed">
 <meta name="twitter:description" content="Пироплазмоз (он же бабезиоз) — острое и опасное кровепаразитарное заболевание, распространённое тем больше, чем южнее находится регион (или чем больше его жителей возят своих собак в тёплые страны).">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Пироплазмоз","description":"Пироплазмоз (он же бабезиоз) — острое и опасное кровепаразитарное заболевание, распространённое тем больше, чем южнее находится регион (или чем больше его жителей возят своих собак в тёплые страны). О","datePublished":"2026-03-30T11:23:54.932065+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/piroplazmoz-47.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Пироплазмоз</span></nav>
     <h1>Пироплазмоз</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979549799-4gkdsk.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979549799-4gkdsk.mp4" poster="/assets/posters/1774979549799-4gkdsk.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/zbsH2Rzozr6uTEhF-1712308118413.mp4"></a><b>Пироплазмоз </b>(он же бабезиоз) — острое и опасное кровепаразитарное заболевание, распространённое тем больше, чем южнее находится регион (или чем больше его жителей возят своих собак в тёплые страны).<br>
  <br>
 Основным переносчиком пироплазмоза являются <b>иксодовые клещи</b>, бабезии живут у них в слюнных железах и проникают в кровь собаки при впрыскивании слюны. Поэтому наилучшей защитой от пироплазмоза и иксодовых клещей являются <u>изоксазолины (Бравекто, Симпарика, Несгард)</u>: клещей парализует в момент попытки прокусить кожу собаки, и впрыснуть слюну с бабезиями гады просто не успевают.<br>
@@ -78,5 +78,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

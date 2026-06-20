@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Полипрагмазия (полифармация) — назначение большого количества препаратов одновременно, в том числе необоснованно.(определение от гугла)  
 Мне кажется, что это одна из наиболее существенных проблем вет">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Полипрагмазия: всего от всего, и побольше","description":"Полипрагмазия (полифармация) — назначение большого количества препаратов одновременно, в том числе необоснованно.(определение от гугла) Мне кажется, что это одна из наиболее существенных проблем ветер","datePublished":"2026-03-30T11:23:58.229335+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/polipragmaziya-vsego-ot-vsego-i-pobolshe-51.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -38,7 +38,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Полипрагмазия: всего от всего, и побольше</span></nav>
     <h1>Полипрагмазия: всего от всего, и побольше</h1>
     <div class="article-meta"><span class="tag">лечение</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979979795-0tzbe1.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979979795-0tzbe1.mp4" poster="/assets/posters/1774979979795-0tzbe1.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/vgsDHJZnk6WVJzwK-1714408490536.mp4"></a><b>Полипрагмазия</b> (полифармация) — назначение большого количества препаратов одновременно, в том числе необоснованно.<i>(определение от гугла)  </i><br>
 Мне кажется, что это одна из наиболее существенных проблем ветеринарии (я сейчас говорю о российской ветеринарии, потому что про неё я лучше знаю), следующая за отсутствием логического мышления (впрочем, сдаётся мне, это связанные между собой вещи). <b>Простыня из десятка препаратов по любому поводу, от чиха до хромоты. <br>
 </b><br>
@@ -81,5 +81,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

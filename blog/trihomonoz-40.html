@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Трихомоноз — VetPodobed">
 <meta name="twitter:description" content="Очень (на мой ветеринарный взгляд) любопытная патология, поскольку болеют ей в подавляющем большинстве случаев не просто кошки, а высокопородистые кошки. То есть положительный результат анализа, как м">
 <meta name="twitter:image" content="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978822911-gi2s9v.jpg">
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Трихомоноз","description":"Очень (на мой ветеринарный взгляд) любопытная патология, поскольку болеют ей в подавляющем большинстве случаев не просто кошки, а высокопородистые кошки. То есть положительный результат анализа, как м","image":"https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978822911-gi2s9v.jpg","datePublished":"2026-03-30T11:23:50.627085+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/trihomonoz-40.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -69,5 +69,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

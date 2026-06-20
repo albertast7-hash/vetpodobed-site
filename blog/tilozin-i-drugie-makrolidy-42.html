@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Тилозин и другие макролиды — VetPodobed">
 <meta name="twitter:description" content="Макролиды — одна из моих самых любимых групп антибактериальных препаратов в силу их высочайшей безопасности (их можно применять и у совсем малышни в том числе). Они неплохо проникают в большинство орг">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Тилозин и другие макролиды","description":"Макролиды — одна из моих самых любимых групп антибактериальных препаратов в силу их высочайшей безопасности (их можно применять и у совсем малышни в том числе). Они неплохо проникают в большинство орг","datePublished":"2026-03-30T11:23:52.371824+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/tilozin-i-drugie-makrolidy-42.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Тилозин и другие макролиды</span></nav>
     <h1>Тилозин и другие макролиды</h1>
     <div class="article-meta"><span class="tag">препараты</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978951428-1ao2iy.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978951428-1ao2iy.mp4" poster="/assets/posters/1774978951428-1ao2iy.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><i>Макролиды </i>— одна из моих самых любимых групп антибактериальных препаратов в силу их высочайшей безопасности (их можно применять и у совсем малышни в том числе). Они неплохо проникают в большинство органов и тканей (исключением является головной мозг и кости). Эффективно воздействуют на кокков (круглые грамположительные мерзавцы) и внутриклеточных возбудителей (вроде всеми любимых микоплазм или, что более важно, хламидий), на палочковидные бактерии почти не действуют (разные препараты группы — по-разному, но никто — не хорошо).<br>
  <br>
 Макролиды мешают бактериям размножаться, а не пытаются убить их (хотя всё зависит от концентрации), поэтому они не наносят такого значимого повреждения микробиоте собачье-кошачьего организма. <br>
@@ -72,5 +72,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

@@ -14,6 +14,7 @@ import { writeFileSync, readFileSync, mkdirSync, existsSync, readdirSync, unlink
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -74,6 +75,37 @@ function isVideo(u) { return /\.(mp4|mov|webm|m4v|ogv)$/i.test(u || ''); }
 function isImage(u) { return /\.(jpe?g|png|webp|gif|avif|svg)$/i.test(u || ''); }
 // OG/Schema-картинка — только если media реально картинка (не видео).
 function ogImageOf(p) { return isImage(p.media_url) ? p.media_url : null; }
+
+// --- Постеры видео (первый кадр) ------------------------------------------
+// Для каждого видео ffmpeg вытаскивает кадр на ~1-й секунде (избегаем чёрного
+// интро) → лёгкий .jpg. В списке показываем как <img> (быстро, без загрузки
+// видео), на странице статьи — как poster у <video>. Кэшируется: уже готовые
+// постеры коммитятся в репо и переиспользуются (ffmpeg не нужен на каждой сборке).
+const POSTERS_DIR = join(ROOT, 'assets/posters');
+const POSTERS = new Map(); // media_url -> '/assets/posters/<name>.jpg'
+function posterNameFor(u) {
+  const base = (String(u).split('/').pop() || '').replace(/\.[a-z0-9]+$/i, '');
+  return base.replace(/[^A-Za-z0-9_-]/g, '') + '.jpg';
+}
+function posterFor(u) { return POSTERS.get(u) || null; }
+function ensurePosters(posts) {
+  if (!existsSync(POSTERS_DIR)) mkdirSync(POSTERS_DIR, { recursive: true });
+  let made = 0, reused = 0, failed = 0;
+  for (const p of posts) {
+    if (!isVideo(p.media_url)) continue;
+    const name = posterNameFor(p.media_url);
+    const out = join(POSTERS_DIR, name);
+    const web = '/assets/posters/' + name;
+    if (existsSync(out)) { POSTERS.set(p.media_url, web); reused++; continue; }
+    try {
+      execFileSync('ffmpeg', ['-loglevel', 'error', '-ss', '1', '-i', p.media_url,
+        '-frames:v', '1', '-vf', 'scale=640:-2', '-q:v', '5', '-y', out],
+        { stdio: 'ignore', timeout: 90000 });
+      if (existsSync(out)) { POSTERS.set(p.media_url, web); made++; } else failed++;
+    } catch { failed++; /* нет ffmpeg или видео недоступно → откат на плитку «▶ Видео» */ }
+  }
+  console.log(`✓ Постеры видео: ${made} создано, ${reused} из кэша, ${failed} не удалось`);
+}
 
 // --- Данные ---------------------------------------------------------------
 // Берём статьи через SECURITY DEFINER RPC get_public_posts() — она отдаёт anon-ключу
@@ -144,6 +176,19 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
   </div>
   <div class="foot-bottom">© ${new Date().getFullYear()} VetPodobed · Автор материалов — ${esc(AUTHOR)}</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>`;
 }
@@ -176,7 +221,10 @@ function articlePage(post, all) {
   }
   let cover = '';
   if (isVideo(post.media_url)) {
-    cover = `<video class="article-cover" src="${esc(post.media_url)}" controls preload="metadata" playsinline></video>`;
+    const poster = posterFor(post.media_url);
+    // Гиф-режим: muted+loop, БЕЗ autoplay-атрибута — играет только когда видно
+    // (IntersectionObserver в shell). Постер = первый кадр сразу, без чёрного box.
+    cover = `<video class="article-cover gif" src="${esc(post.media_url)}"${poster ? ` poster="${poster}"` : ''} muted loop playsinline preload="metadata"></video>`;
   } else if (isImage(post.media_url)) {
     cover = `<img class="article-cover" src="${esc(post.media_url)}" alt="${esc(post.title)}" loading="lazy">`;
   }
@@ -202,9 +250,12 @@ function blogIndex(all) {
     const date = p.published_at || p.created_at;
     let img;
     if (isVideo(p.media_url)) {
-      // Видео НЕ грузим в списке (65 видео = тормоза) — лёгкая плитка, само видео
-      // подгружается уже на странице статьи при клике.
-      img = `<div class="card-media card-video"><span class="vlabel">▶ Видео</span></div>`;
+      // В списке — статичный постер (первый кадр) как лёгкая картинка, без загрузки
+      // видео. Если постера нет (ffmpeg не отработал) — откат на плитку «▶ Видео».
+      const poster = posterFor(p.media_url);
+      img = poster
+        ? `<div class="card-media"><img src="${poster}" alt="" loading="lazy"><span class="play-badge">▶</span></div>`
+        : `<div class="card-media card-video"><span class="vlabel">▶ Видео</span></div>`;
     } else if (isImage(p.media_url)) {
       img = `<img src="${esc(p.media_url)}" alt="" loading="lazy">`;
     } else {
@@ -250,6 +301,8 @@ async function main() {
   console.log(`→ Тяну статьи из ${SUPABASE_URL} …`);
   const posts = await fetchPosts();
   console.log(`✓ Получено опубликованных статей: ${posts.length}`);
+
+  ensurePosters(posts); // первый кадр каждого видео → assets/posters/*.jpg (кэш)
 
   if (!existsSync(BLOG_DIR)) mkdirSync(BLOG_DIR, { recursive: true });
   // Чистим старые сгенерированные .html (кроме .gitkeep)

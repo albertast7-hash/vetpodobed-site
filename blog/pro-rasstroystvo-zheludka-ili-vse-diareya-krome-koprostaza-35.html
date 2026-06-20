@@ -24,7 +24,7 @@
  
 Мы называем диареей любое изменение стула. Это может быть жидкий стул «фонтаном»; стул просто размягченный; оформленный, но покрытый сли">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Про расстройство желудка, или «всё диарея, кроме копростаза»","description":"Про расстройство желудка, или «всё диарея, кроме копростаза» Мы называем диареей любое изменение стула. Это может быть жидкий стул «фонтаном»; стул просто размягченный; оформленный, но покрытый слизью","datePublished":"2026-03-30T11:23:46.125941+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/pro-rasstroystvo-zheludka-ili-vse-diareya-krome-koprostaza-35.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Про расстройство желудка, или «всё диарея, кроме копростаза»</span></nav>
     <h1>Про расстройство желудка, или «всё диарея, кроме копростаза»</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1776779557234-svpxt6.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1776779557234-svpxt6.mp4" poster="/assets/posters/1776779557234-svpxt6.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/9JRUiMng24GwuqwJ-1707985849914.mp4"></a><b>Про расстройство желудка, или «всё диарея, кроме копростаза» <br>
  <br>
 </b>Мы называем диареей любое изменение стула. Это может быть жидкий стул «фонтаном»; стул просто размягченный; оформленный, но покрытый слизью; с примесью крови; пузырящийся… <br>
@@ -84,5 +84,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

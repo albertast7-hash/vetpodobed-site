@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Дерматофития — VetPodobed">
 <meta name="twitter:description" content="Самое известное (и самое распространённое) грибковое заболевание, встречающееся у кошек, собак, людей и много у кого ещё. На самом деле дерматофиты — это не вид, а группа грибков, которые в ходе эволю">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Дерматофития","description":"Самое известное (и самое распространённое) грибковое заболевание, встречающееся у кошек, собак, людей и много у кого ещё. На самом деле дерматофиты — это не вид, а группа грибков, которые в ходе эволю","datePublished":"2026-03-30T11:24:53.114998+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/dermatofitiya-120.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Дерматофития</span></nav>
     <h1>Дерматофития</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774880020944-erc779.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774880020944-erc779.mp4" poster="/assets/posters/1774880020944-erc779.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://pub-da3a607cc3d643ffaa67028e564144f3.r2.dev/y33p78LzUSKADoss-1774196549802.mp4"></a>Самое известное (и самое распространённое) грибковое заболевание, встречающееся у кошек, собак, людей и много у кого ещё. На самом деле дерматофиты — это не вид, а группа грибков, которые в ходе эволюции научились питаться кератином (материалом, из которого состоят волосы и шерсть, а также, в значительной степени, клетки эпидермиса). Основные варианты таких грибов относятся к родам <i>Microsporum, Trichophyton </i>или <i>Epidermophyton</i>, при этом <i>Microsporum canis</i> является неоспоримым лидером среди этой веселой компании. И да, именно этот вариант дерматофитов (не все виды) светится весёленьким салатовым цветом в лучах ультрафиолета.<br>
 <br>
 <i>Интересно, что, несмотря на название (canis в переводе означает «собачий»), этот вид грибка значительно чаще встречается у кошек (90% всех дерматофитий), а не у собак (примерно 60%).</i><br>
@@ -75,5 +75,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

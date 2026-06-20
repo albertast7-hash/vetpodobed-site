@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Дирофиляриоз — VetPodobed">
 <meta name="twitter:description" content="Давайте поговорим про заболевание, именуемое также «болезнью сердечного червя», что не совсем справедливо, поскольку эти червячки больше любят жить не в сердце, а в  сосудах, особенно в лёгочных артер">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Дирофиляриоз","description":"Давайте поговорим про заболевание, именуемое также «болезнью сердечного червя», что не совсем справедливо, поскольку эти червячки больше любят жить не в сердце, а в сосудах, особенно в лёгочных артери","datePublished":"2026-03-30T11:24:08.798833+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/dirofilyarioz-65.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Дирофиляриоз</span></nav>
     <h1>Дирофиляриоз</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774980256659-tvgiqa.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774980256659-tvgiqa.mp4" poster="/assets/posters/1774980256659-tvgiqa.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/iIgJfGgnVqPEAxXj-1725090180579.mp4"></a>Давайте поговорим про заболевание, именуемое также <b>«болезнью сердечного червя»</b>, что не совсем справедливо, поскольку эти червячки больше любят жить не в сердце, а в  сосудах, особенно в лёгочных артериях. Однако примерно в 30% случаев дирофиляриоза черви и правда оказываются в сердце (обычно в правых отделах) и вызывают очень впечатляющие симптомы, к сожалению, включающие в себя внезапную гибель собаки или кошки.<b><br>
 Да, в кошках дирофилярии тоже живут, равно как и в человеке, но давайте всё по порядку.<br>
 </b><br>
@@ -70,5 +70,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

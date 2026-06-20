@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Антибиотики, которые я не люблю. — VetPodobed">
 <meta name="twitter:description" content="Сразу оговорюсь: теоретически можно представить ситуацию, при которой потенциальная польза от применения этих препаратов перевешивает опасности, связанные с оным применением. Однако это вот прям исклю">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Антибиотики, которые я не люблю.","description":"Сразу оговорюсь: теоретически можно представить ситуацию, при которой потенциальная польза от применения этих препаратов перевешивает опасности, связанные с оным применением. Однако это вот прям исклю","datePublished":"2026-03-30T11:23:53.898444+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/antibiotiki-kotorye-ya-ne-lyublyu-45.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Антибиотики, которые я не люблю.</span></nav>
     <h1>Антибиотики, которые я не люблю.</h1>
     <div class="article-meta"><span class="tag">препараты</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775760961643-d9z2me.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775760961643-d9z2me.mp4" poster="/assets/posters/1775760961643-d9z2me.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body">Сразу оговорюсь: теоретически можно представить ситуацию, при которой потенциальная польза от применения этих препаратов перевешивает опасности, связанные с оным применением. Однако это вот прям исключительные случаи, а никаким образом не рутина. <br>
   <br>
 Итак, первое место в моём личном антирейтинге антибактериальных препаратов держит группа <b>аминогликозидов </b>(<u>гентамицин, стрептомицин, амикацин</u>). Такое отношение моё объясняется высокой токсичностью всех вышеперечисленных препаратов для некоторых небесполезных органов: сердца, почек, головного мозга и нервной системы в целом. Особенно напрягает то, что основной повод использовать аминогликозиды — инфекции, которые сами по себе нарушают работу всего перечисленного (почек, сердца, нервов...) Например, есть у нас собака с лептоспирозом (который вызывает почечную недостаточность и неврологические расстройства), а мы, следуя официальной рекомендации СББЖ (станции по борьбе с болезнями животных), бац! и шарахнули поверх имеющихся повреждений стрептомицин. Очень вероятно, что почечкам такой подход категорически не понравится. <br>
@@ -77,5 +77,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Этот ужасный микоплазмоз — VetPodobed">
 <meta name="twitter:description" content="Микоплазмы — это что-то среднее между бактериями и простейшими (ближе к бактериям, но такие же мяконькие, как амёбы). В природе их сто миллионов видов, у собак встречается около пятнадцати видов, у ко">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Этот ужасный микоплазмоз","description":"Микоплазмы — это что-то среднее между бактериями и простейшими (ближе к бактериям, но такие же мяконькие, как амёбы). В природе их сто миллионов видов, у собак встречается около пятнадцати видов, у ко","datePublished":"2026-03-30T11:23:54.404091+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/etot-uzhasnyy-mikoplazmoz-46.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Этот ужасный микоплазмоз</span></nav>
     <h1>Этот ужасный микоплазмоз</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979470470-y28syq.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979470470-y28syq.mp4" poster="/assets/posters/1774979470470-y28syq.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><i>Микоплазмы </i>— это что-то среднее между бактериями и простейшими (ближе к бактериям, но такие же мяконькие, как амёбы). В природе их сто миллионов видов, у собак встречается около пятнадцати видов, у кошек — примерно столько же (некоторые микоплазмы могут жить и на собаках, и на кошках).<br>
  <br>
 Главный вопрос с этим типом живых существ (для ветеринаров и владельцев домашних животных) состоит вот в чём: это комменсальная микрофлора (те, кто сосуществует с организмом-носителем, не принося ни пользы, ни вреда) или возбудитель заболевания?<br>
@@ -75,5 +75,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

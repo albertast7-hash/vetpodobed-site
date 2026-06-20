@@ -24,7 +24,7 @@
  
 Так вот: у кошек и собак, разумеется, свой собственны">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Коронавирус","description":"Мы, разумеется, будем говорить о кошачьем и собачьем варианте коронавируса, а не о том, ну, помните, пандемия, локдаун… как в другой жизни было( Так вот: у кошек и собак, разумеется, свой собственный ","datePublished":"2026-03-30T11:23:58.704091+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/koronavirus-52.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Коронавирус</span></nav>
     <h1>Коронавирус</h1>
     <div class="article-meta"><span class="tag">заболевание</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774980115641-tziyfo.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774980115641-tziyfo.mp4" poster="/assets/posters/1774980115641-tziyfo.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/CyZDrZfzuWNhRDAi-1715072369939.mp4"></a>Мы, разумеется, будем говорить о кошачьем и собачьем варианте коронавируса, а не о том, ну, помните, пандемия, локдаун… как в другой жизни было(<br>
  <br>
 Так вот: у кошек и собак, разумеется, свой собственный коронавирус, и поражает он, как правило, желудочно-кишечный тракт, вызывая там воспаление. У собак коронавирус считается слабеньким и, как правило, не нуждается в лечении (проходит за 7 дней, если лечить, и за неделю, если не лечить). Справедливости ради, случаи тяжелого течения собачьего коронавируса тоже описаны, но это вот прям исключение-исключение. <br>
@@ -76,5 +76,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

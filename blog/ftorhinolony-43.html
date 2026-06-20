@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Фторхинолоны — VetPodobed">
 <meta name="twitter:description" content="Группа дозозависимых антибиотиков, основным спектром действия которых является всё грам-отрицательное (а это преимущественно палочковидные бактерии). Отлично проникают куда угодно, включая такие укром">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Фторхинолоны","description":"Группа дозозависимых антибиотиков, основным спектром действия которых является всё грам-отрицательное (а это преимущественно палочковидные бактерии). Отлично проникают куда угодно, включая такие укром","datePublished":"2026-03-30T11:23:52.865463+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/ftorhinolony-43.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -35,7 +35,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Фторхинолоны</span></nav>
     <h1>Фторхинолоны</h1>
     <div class="article-meta"><span class="tag">препараты</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979251536-za1mj9.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774979251536-za1mj9.mp4" poster="/assets/posters/1774979251536-za1mj9.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body">Группа <u>дозозависимых </u>антибиотиков, основным спектром действия которых является всё грам-отрицательное (а это преимущественно палочковидные бактерии). Отлично <b>проникают</b> куда угодно, включая такие укромные уголки организма как <b>мозг, простата и прочие кости</b>.<br>
 <br>
 <b>Это всё были плюсы, из минусов</b>: <br>
@@ -79,5 +79,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

@@ -24,7 +24,7 @@
  
 Разумеется, антибиотики, как и любые др">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Антибиотики","description":"С тех пор как в нашем распоряжении появилось оружие, способное убить или вообще хоть как-то унять распоясавшуюся микрофлору, жизнь стала принципиально другой. Разумеется, антибиотики, как и любые друг","datePublished":"2026-03-30T11:23:51.16878+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/antibiotiki-41.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Антибиотики</span></nav>
     <h1>Антибиотики</h1>
     <div class="article-meta"><span class="tag">препараты</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978884864-yi0obe.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1774978884864-yi0obe.mp4" poster="/assets/posters/1774978884864-yi0obe.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><a href="https://cdn30.notepost.ru/p5irNQrxEOfQceGz-1709745707673.mp4"></a>С тех пор как в нашем распоряжении появилось оружие, способное убить или вообще хоть как-то унять распоясавшуюся микрофлору, жизнь стала принципиально другой.<br>
  <br>
 Разумеется, антибиотики, как и любые другие препараты, могут приводить к проблемам (причем разные антибиотики — к разным), но сейчас давайте обсудим, что надо сделать для того, чтобы антибактериальные препараты <u>выполняли свою основную функцию </u>— боролись (и побеждали в борьбе) с патогенными микроорганизмами.<br>
@@ -85,5 +85,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>

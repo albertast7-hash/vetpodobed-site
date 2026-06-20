@@ -24,7 +24,7 @@
 
 Начнем с того, что существует два основных пу">
 
-<link rel="stylesheet" href="/assets/site.css?v=7c0cdc55">
+<link rel="stylesheet" href="/assets/site.css?v=a5ad0904">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Про рвоту","description":"Мне кажется, нет необходимости объяснять что такое рвота, но не бесполезно разобраться, как организовано это малоприятное (хотя иногда полезное) явление. Начнем с того, что существует два основных пут","datePublished":"2026-03-30T11:23:25.250065+00:00","author":{"@type":"Person","name":"Подобед Екатерина Владимировна"},"publisher":{"@type":"Organization","name":"VetPodobed","logo":{"@type":"ImageObject","url":"https://info.vetpodobed.pro/assets/logo.png"}},"mainEntityOfPage":"https://info.vetpodobed.pro/blog/pro-rvotu-7.html","inLanguage":"ru-RU"}</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
     <nav class="crumbs"><a href="/">Главная</a> › <a href="/blog/">Статьи</a> › <span>Про рвоту</span></nav>
     <h1>Про рвоту</h1>
     <div class="article-meta"><span class="tag">физиология</span><time>30 марта 2026 г.</time></div>
-    <video class="article-cover" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775578224282-8jua50.mp4" controls preload="metadata" playsinline></video>
+    <video class="article-cover gif" src="https://supa.vetpodobed.pro/storage/v1/object/public/post-media/1775578224282-8jua50.mp4" poster="/assets/posters/1775578224282-8jua50.jpg" muted loop playsinline preload="metadata"></video>
     <div class="article-body"><b>Мне кажется, нет необходимости объяснять что такое рвота, но не бесполезно разобраться, как организовано это малоприятное (хотя иногда полезное) явление.<br>
 </b><br>
 Начнем с того, что существует два основных пути возникновения рвоты: <b>механический</b>&nbsp;(когда по различным причинам нарушается нормальное движение желудка и\или кишечника) и <b>токсический</b> (в этом случае в ответ на бяку в&nbsp; крови возбуждается так называемая хеморецепторная триггерная зона&nbsp;<span style="font-size:11pt;font-family:Arial,sans-serif;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;" id="docs-internal-guid-0f9e5db7-7fff-9fea-b893-c497a4671645">—</span>&nbsp;особый участок в мозгу).<br>
@@ -75,5 +75,18 @@
   </div>
   <div class="foot-bottom">© 2026 VetPodobed · Автор материалов — Подобед Екатерина Владимировна</div>
 </footer>
+<script>
+/* Видео-гифки играют ТОЛЬКО когда видны на экране; за кадром — пауза (экономит
+   батарею/трафик). Срабатывает когда пользователь долистал/вернулся к видео. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    var v=e.target;
+    if(e.isIntersecting){ if(v.classList.contains('gif')){ var p=v.play&&v.play(); if(p&&p.catch)p.catch(function(){}); } }
+    else { try{ v.pause(); }catch(_){} }
+  });},{threshold:0.25});
+  document.querySelectorAll('video').forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>
