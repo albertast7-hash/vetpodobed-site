@@ -136,7 +136,9 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
     </div>
     <div>
       <a href="${APP_URL}">Войти / Регистрация</a>
+      <a href="/vrach-podobed.html">О враче</a>
       <a href="/blog/">Все статьи</a>
+      <a href="https://t.me/vetpodobed" target="_blank" rel="noopener">Телеграм-канал</a>
       <a href="${APP_URL}/privacy.html">Политика конфиденциальности</a>
     </div>
   </div>
