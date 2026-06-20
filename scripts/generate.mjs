@@ -202,8 +202,9 @@ function blogIndex(all) {
     const date = p.published_at || p.created_at;
     let img;
     if (isVideo(p.media_url)) {
-      // Видео в карточке — превью по первому кадру (#t=0.1), с бейджем ▶.
-      img = `<div class="card-media"><video src="${esc(p.media_url)}#t=0.1" muted preload="metadata" playsinline></video><span class="play-badge">▶</span></div>`;
+      // Видео НЕ грузим в списке (65 видео = тормоза) — лёгкая плитка, само видео
+      // подгружается уже на странице статьи при клике.
+      img = `<div class="card-media card-video"><span class="vlabel">▶ Видео</span></div>`;
     } else if (isImage(p.media_url)) {
       img = `<img src="${esc(p.media_url)}" alt="" loading="lazy">`;
     } else {
