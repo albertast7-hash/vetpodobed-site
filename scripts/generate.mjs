@@ -23,7 +23,7 @@ const SUPABASE_URL = (process.env.SUPABASE_URL || 'https://supa.vetpodobed.pro')
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY
   // anon-ключ публичен по дизайну (он же в клиенте index.html); read-only.
   || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc5MjgyODYzLCJleHAiOjIwOTQ2NDI4NjN9.UXtmCmsdaQoLj6V1_Llw9q9nyXMDHZ72lAOftXQdli0';
-const SITE_URL = (process.env.SITE_URL || 'https://vetpodobed.pro').replace(/\/$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://info.vetpodobed.pro').replace(/\/$/, '');
 const APP_URL = 'https://app.vetpodobed.pro';
 const SITE_NAME = 'VetPodobed';
 const AUTHOR = 'Подобед Екатерина Владимировна';

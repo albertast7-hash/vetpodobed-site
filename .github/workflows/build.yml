@@ -34,7 +34,7 @@ jobs:
           # anon-ключ публичен по дизайну; можно переопределить repo variable SUPABASE_ANON_KEY
           SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://supa.vetpodobed.pro' }}
           SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
-          SITE_URL: ${{ vars.SITE_URL || 'https://vetpodobed.pro' }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://info.vetpodobed.pro' }}
         run: node scripts/generate.mjs
 
       - uses: actions/configure-pages@v5

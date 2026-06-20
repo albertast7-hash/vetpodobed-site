@@ -39,7 +39,7 @@ sitemap.xml             Карта сайта (создаётся генерат
 ```bash
 node scripts/generate.mjs          # использует дефолты (supa.vetpodobed.pro, vetpodobed.pro)
 # или с переопределением:
-SITE_URL=https://vetpodobed.pro SUPABASE_URL=https://supa.vetpodobed.pro node scripts/generate.mjs
+SITE_URL=https://info.vetpodobed.pro SUPABASE_URL=https://supa.vetpodobed.pro node scripts/generate.mjs
 python -m http.server 8080         # открыть http://localhost:8080 для проверки
 ```
 

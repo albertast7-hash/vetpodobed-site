@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vetpodobed.pro/sitemap.xml
+Sitemap: https://info.vetpodobed.pro/sitemap.xml
