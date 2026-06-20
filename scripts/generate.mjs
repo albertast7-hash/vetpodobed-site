@@ -122,6 +122,7 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
 <header class="site-header">
   <a class="brand" href="/"><img src="/assets/logo.png" alt="" width="34" height="34"><span>VetPodobed</span></a>
   <nav>
+    <a href="/vrach-podobed.html">Врач</a>
     <a href="/blog/">Статьи</a>
     <a class="cta-sm" href="${APP_URL}">Открыть приложение</a>
   </nav>
@@ -233,6 +234,7 @@ function blogIndex(all) {
 function sitemap(all) {
   const urls = [
     { loc: `${SITE_URL}/`, pri: '1.0' },
+    { loc: `${SITE_URL}/vrach-podobed.html`, pri: '0.9' },
     { loc: `${SITE_URL}/blog/`, pri: '0.8' },
     ...all.map(p => ({ loc: `${SITE_URL}/blog/${postSlug(p)}.html`, pri: '0.7', lastmod: (p.published_at || p.created_at || '').slice(0, 10) }))
   ];
@@ -259,13 +261,15 @@ async function main() {
   writeFileSync(join(BLOG_DIR, 'index.html'), blogIndex(posts));
   writeFileSync(join(ROOT, 'sitemap.xml'), sitemap(posts));
 
-  // Синхронизируем версию CSS в лендинге (index.html — статичный, не генерится здесь).
-  try {
-    const idxPath = join(ROOT, 'index.html');
-    const idx = readFileSync(idxPath, 'utf8');
-    const patched = idx.replace(/\/assets\/site\.css(\?v=[^"']*)?/g, `/assets/site.css?v=${CSS_VER}`);
-    if (patched !== idx) { writeFileSync(idxPath, patched); console.log('✓ index.html: версия CSS синхронизирована'); }
-  } catch (e) { console.warn('index.html css-ver skip:', e.message); }
+  // Синхронизируем версию CSS в статичных страницах (не генерятся здесь).
+  for (const page of ['index.html', 'vrach-podobed.html']) {
+    try {
+      const p = join(ROOT, page);
+      const html = readFileSync(p, 'utf8');
+      const patched = html.replace(/\/assets\/site\.css(\?v=[^"']*)?/g, `/assets/site.css?v=${CSS_VER}`);
+      if (patched !== html) { writeFileSync(p, patched); console.log(`✓ ${page}: версия CSS синхронизирована`); }
+    } catch (e) { console.warn(`${page} css-ver skip:`, e.message); }
+  }
 
   console.log(`✓ Сгенерировано: ${n} статей + blog/index.html + sitemap.xml (css v=${CSS_VER})`);
 }
