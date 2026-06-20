@@ -10,13 +10,21 @@
 // Контент авторский (rich-text из админки) — рендерим content_html как есть.
 // Никакого LLM/ИИ для текста: только готовые статьи врача.
 
-import { writeFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync, existsSync, readdirSync, unlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const BLOG_DIR = join(ROOT, 'blog');
+
+// Cache-busting: версия CSS = хеш содержимого. Меняется только когда меняется CSS,
+// тогда браузеры гарантированно подтягивают новый файл (а не старый из кэша).
+const CSS_VER = (() => {
+  try { return createHash('sha1').update(readFileSync(join(ROOT, 'assets/site.css'))).digest('hex').slice(0, 8); }
+  catch { return '1'; }
+})();
 
 // --- Конфиг ---------------------------------------------------------------
 const SUPABASE_URL = (process.env.SUPABASE_URL || 'https://supa.vetpodobed.pro').replace(/\/$/, '');
@@ -107,7 +115,7 @@ ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">` : ''}
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(desc)}">
 ${ogImage ? `<meta name="twitter:image" content="${esc(ogImage)}">` : ''}
-<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/site.css?v=${CSS_VER}">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 </head>
 <body>
@@ -250,7 +258,16 @@ async function main() {
   }
   writeFileSync(join(BLOG_DIR, 'index.html'), blogIndex(posts));
   writeFileSync(join(ROOT, 'sitemap.xml'), sitemap(posts));
-  console.log(`✓ Сгенерировано: ${n} статей + blog/index.html + sitemap.xml`);
+
+  // Синхронизируем версию CSS в лендинге (index.html — статичный, не генерится здесь).
+  try {
+    const idxPath = join(ROOT, 'index.html');
+    const idx = readFileSync(idxPath, 'utf8');
+    const patched = idx.replace(/\/assets\/site\.css(\?v=[^"']*)?/g, `/assets/site.css?v=${CSS_VER}`);
+    if (patched !== idx) { writeFileSync(idxPath, patched); console.log('✓ index.html: версия CSS синхронизирована'); }
+  } catch (e) { console.warn('index.html css-ver skip:', e.message); }
+
+  console.log(`✓ Сгенерировано: ${n} статей + blog/index.html + sitemap.xml (css v=${CSS_VER})`);
 }
 
 main().catch(e => { console.error('✗ Ошибка генерации:', e); process.exit(1); });
