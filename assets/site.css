@@ -64,9 +64,9 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 .post-card img{width:100%;aspect-ratio:16/9;object-fit:cover}
 .card-media{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
 .card-media video{width:100%;height:100%;object-fit:cover;display:block}
-.play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:46px;height:46px;border-radius:50%;background:rgba(15,118,110,.85);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:18px;padding-left:3px;pointer-events:none}
+.play-badge{position:absolute;right:8px;bottom:8px;
+  width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:11px;padding-left:2px;pointer-events:none}
 .card-noimg{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:48px;
   background:linear-gradient(135deg,#eaf5f2,#dcefe9)}
 .card-body{padding:16px 18px;display:flex;flex-direction:column;gap:8px}
