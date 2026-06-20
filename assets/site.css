@@ -131,4 +131,6 @@ video.article-cover{background:#000;max-height:70vh;object-fit:contain}
 .topics li{position:relative;padding-left:22px;line-height:1.45;font-size:15px}
 .topics li::before{content:"🐾";position:absolute;left:0;top:0;font-size:13px}
 .doctor-teaching .cta{margin-top:4px}
+.teach-alt{font-size:14px;color:var(--muted);margin:12px 0 0!important}
+.teach-alt a{color:var(--teal)}
 @media(max-width:560px){.topics{grid-template-columns:1fr}.doctor-teaching{padding:20px 18px}}
