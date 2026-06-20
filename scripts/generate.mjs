@@ -41,9 +41,12 @@ function slugify(title, id) {
   const short = String(id || '').replace(/-/g, '').slice(0, 8);
   return (base || 'post') + '-' + short;
 }
-// Предпочитаем готовый slug из БД (стабильные URL); транслит — фолбэк.
+// SEO-slug строим из ЗАГОЛОВКА (транслит) + id для уникальности/стабильности.
+// Слуги из БД (channel_posts.slug) намеренно НЕ используем: они непоследовательны
+// (часть однобуквенные «a»/«t», часть — обрывки первого предложения), что плохо
+// для поисковых URL. Заголовок даёт keyword-rich адрес: /blog/amfotericin-b-127.
 function postSlug(p) {
-  return (p.slug && String(p.slug).trim()) ? String(p.slug).trim() : slugify(p.title, p.id);
+  return slugify(p.title, p.id);
 }
 const ESC = { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' };
 function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ESC[c]); }
