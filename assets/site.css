@@ -121,3 +121,14 @@ video.article-cover{background:#000;max-height:70vh;object-fit:contain}
 .doctor-extra a{color:var(--teal)}
 @media(max-width:560px){.doctor-photo{float:none;display:block;width:170px;margin:0 auto 18px}
   .doctor-page h1{font-size:25px}}
+.doctor-teaching{margin-top:32px;background:#eaf5f2;border:1px solid var(--line);
+  border-radius:var(--radius);padding:26px 26px}
+.doctor-teaching h2{font-size:21px;margin:0 0 12px}
+.doctor-teaching p{line-height:1.6;margin:0 0 12px}
+.teach-label{font-weight:700;margin:6px 0 8px!important}
+.topics{list-style:none;margin:0 0 16px;padding:0;display:grid;
+  grid-template-columns:1fr 1fr;gap:8px 18px}
+.topics li{position:relative;padding-left:22px;line-height:1.45;font-size:15px}
+.topics li::before{content:"🐾";position:absolute;left:0;top:0;font-size:13px}
+.doctor-teaching .cta{margin-top:4px}
+@media(max-width:560px){.topics{grid-template-columns:1fr}.doctor-teaching{padding:20px 18px}}
