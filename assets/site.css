@@ -23,6 +23,15 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 .site-header nav a{color:var(--muted);font-weight:600;font-size:15px}
 .cta-sm{background:var(--teal);color:#fff!important;padding:8px 14px;border-radius:10px}
 .cta-sm:hover{background:var(--teal-d);text-decoration:none}
+/* Мобильная шапка: бренд на первой строке, навигация — на отдельной, без наложений */
+@media(max-width:600px){
+  .site-header{flex-wrap:wrap;padding:10px 14px;gap:6px 12px}
+  .brand{font-size:16px;gap:7px}
+  .brand img{width:28px;height:28px}
+  .site-header nav{width:100%;justify-content:center;gap:18px}
+  .site-header nav a{font-size:14px}
+  .cta-sm{padding:7px 12px;font-size:13px}
+}
 
 /* Hero */
 .hero{text-align:center;padding:64px 0 40px}
