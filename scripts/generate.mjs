@@ -164,7 +164,7 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script
   <div class="foot-cols">
     <div>
       <strong>VetPodobed</strong>
-      <p>Ветеринарный ассистент для владельцев кошек и собак: расшифровка анализов, дневник питомца, связь с врачом.</p>
+      <p>Ветеринарный помощник для владельцев кошек и собак: расшифровка анализов, дневник питомца, связь с врачом.</p>
     </div>
     <div>
       <a href="${APP_URL}">Войти / Регистрация</a>
