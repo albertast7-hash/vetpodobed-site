@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VetPodobed promo stories — дозы, тесты, осмотр, калории</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --teal: #0f766e;
+    --teal-2: #14b8a6;
+    --teal-soft: #ccfbf1;
+    --amber: #f59e0b;
+    --amber-soft: #fef3c7;
+    --red: #ef4444;
+    --red-soft: #fee2e2;
+    --green: #16a34a;
+    --green-soft: #dcfce7;
+    --blue: #3b82f6;
+    --blue-soft: #dbeafe;
+    --violet: #7c3aed;
+    --violet-soft: #ede9fe;
+    --line: #e2e8f0;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  html,
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: #e5e7eb;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--ink);
+  }
+
+  body { overflow-x: hidden; }
+
+  /* Горизонтальная колода сторис со snap-скроллом */
+  .deck {
+    display: flex;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .deck::-webkit-scrollbar { display: none; }
+
+  .slide {
+    flex: 0 0 100%;
+    height: 100vh;
+    scroll-snap-align: center;
+    display: grid;
+    place-items: center;
+  }
+
+  .story {
+    --accent: var(--teal);
+    --accent-2: var(--teal-2);
+    --accent-soft: var(--teal-soft);
+    width: min(420px, 100vw);
+    aspect-ratio: 9 / 16;
+    max-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 16% 15%, rgba(245, 158, 11, 0.22), transparent 23%),
+      radial-gradient(circle at 86% 78%, color-mix(in srgb, var(--accent-2) 40%, transparent), transparent 25%),
+      linear-gradient(180deg, #f8fafc 0%, #eefdf9 52%, #f8fafc 100%);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  }
+
+  /* Акценты по фичам */
+  .story.s-analyses { --accent: #0f766e; --accent-2: #14b8a6; --accent-soft: #ccfbf1; }
+  .story.s-dose  { --accent: #0891b2; --accent-2: #22d3ee; --accent-soft: #cffafe; }
+  .story.s-tests { --accent: #7c3aed; --accent-2: #a78bfa; --accent-soft: #ede9fe; }
+  .story.s-exam  { --accent: #16a34a; --accent-2: #4ade80; --accent-soft: #dcfce7; }
+  .story.s-cal   { --accent: #ea580c; --accent-2: #fb923c; --accent-soft: #ffedd5; }
+  .story.s-consult { --accent: #2563eb; --accent-2: #60a5fa; --accent-soft: #dbeafe; }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: .36;
+    background-image:
+      linear-gradient(rgba(15, 23, 42, .035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, .03) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,.75), transparent 84%);
+  }
+
+  .top {
+    position: absolute;
+    inset: 28px 26px auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 3;
+  }
+
+  .logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0b3a55;
+    box-shadow: 0 12px 26px rgba(15, 118, 110, 0.22);
+    flex: none;
+  }
+
+  .logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+  .brand { display: grid; line-height: 1.1; }
+  .brand strong { font-size: 22px; }
+  .brand span { color: var(--muted); font-size: 13px; margin-top: 3px; }
+
+  .headline {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    top: 110px;
+    z-index: 2;
+  }
+
+  .eyebrow {
+    width: max-content;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 16px 0 0;
+    font-size: 30px;
+    line-height: 1.08;
+    max-width: 368px;
+  }
+
+  .sub {
+    margin-top: 12px;
+    max-width: 356px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.42;
+  }
+
+  .phone-wrap {
+    position: absolute;
+    left: 50%;
+    top: 360px;
+    width: 258px;
+    height: 420px;
+    transform: translateX(-50%) rotate(-3deg);
+    z-index: 2;
+  }
+  .story.in .phone-wrap {
+    animation: phoneEnter 900ms cubic-bezier(.2,.8,.2,1) 400ms both;
+  }
+
+  .phone-shadow {
+    position: absolute;
+    inset: 28px -16px -22px 20px;
+    border-radius: 42px;
+    background: rgba(15, 23, 42, .18);
+    filter: blur(22px);
+  }
+
+  .phone {
+    position: relative;
+    height: 100%;
+    border: 8px solid #0f172a;
+    border-radius: 38px;
+    background: var(--bg);
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
+  }
+
+  .notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 84px;
+    height: 18px;
+    transform: translateX(-50%);
+    border-radius: 0 0 13px 13px;
+    background: #0f172a;
+    z-index: 3;
+  }
+
+  .app-screen {
+    position: absolute;
+    inset: 0;
+    padding: 34px 14px 14px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .app-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .app-head .a-title { font-size: 13px; font-weight: 800; }
+  .app-head .a-sub { font-size: 10px; color: var(--muted); }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 17px;
+  }
+
+  .card {
+    border: 1px solid rgba(226, 232, 240, .9);
+    border-radius: 15px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, .06);
+    padding: 12px;
+  }
+  .card + .card { margin-top: 9px; }
+
+  .c-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 9px;
+  }
+
+  .pill {
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .pill.ok   { color: #065f46; background: var(--green-soft); }
+  .pill.warn { color: #92400e; background: var(--amber-soft); }
+  .pill.bad  { color: #991b1b; background: var(--red-soft); }
+  .pill.accent { color: var(--accent); background: var(--accent-soft); }
+
+  .kv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 11px;
+    padding: 5px 0;
+    border-top: 1px solid #f1f5f9;
+  }
+  .kv:first-of-type { border-top: 0; }
+  .kv .k { color: var(--muted); }
+  .kv .v { font-weight: 700; }
+
+  /* — Дозы: крупный результат — */
+  .big-result {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 4px 0 2px;
+  }
+  .big-result .num { font-size: 26px; font-weight: 800; color: var(--accent); letter-spacing: -.5px; }
+  .big-result .unit { font-size: 12px; color: var(--muted); font-weight: 700; }
+  .hint { font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+  .syringe {
+    position: relative;
+    height: 12px;
+    border-radius: 6px;
+    background: #eef2f7;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .syringe i {
+    position: absolute; inset: 0 42% 0 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    border-radius: inherit;
+  }
+
+  /* — FGS строки — */
+  .fgs-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    padding: 5px 0;
+    border-top: 1px solid #f1f5f9;
+  }
+  .fgs-row:first-of-type { border-top: 0; }
+  .dots { display: flex; gap: 4px; }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #e2e8f0;
+  }
+  .dot.on { background: var(--accent); }
+  .dot.hi { background: var(--amber); }
+
+  /* — Осмотр: кольцо здоровья — */
+  .ring-wrap { display: flex; align-items: center; gap: 12px; }
+  .ring { position: relative; width: 84px; height: 84px; flex: none; }
+  .ring svg { transform: rotate(-90deg); }
+  .ring .val {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    text-align: center; line-height: 1;
+  }
+  .ring .val b { font-size: 23px; color: var(--accent); line-height: 1; }
+  .ring .val small {
+    position: absolute; left: 0; right: 0; bottom: 15px;
+    text-align: center; font-size: 8px; color: var(--muted);
+  }
+  .counts { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .sys-row {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px; padding: 4px 0; border-top: 1px solid #f1f5f9;
+  }
+  .sys-row:first-of-type { border-top: 0; }
+  .sys-row .mk { font-weight: 800; }
+  .sys-row .mk.ok { color: var(--green); }
+  .sys-row .mk.warn { color: var(--amber); }
+
+  /* — Калории — */
+  .cal-hero { text-align: center; padding: 4px 0 2px; }
+  .cal-hero .num { font-size: 34px; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
+  .cal-hero .unit { font-size: 12px; color: var(--muted); font-weight: 700; margin-left: 4px; }
+  .cal-hero .cap { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .bcs {
+    display: flex; gap: 4px; margin-top: 8px;
+  }
+  .bcs i {
+    flex: 1; height: 7px; border-radius: 3px; background: #e2e8f0;
+  }
+  .bcs i.on { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mini {
+    border-radius: 11px; padding: 8px; background: #f8fafc;
+    font-size: 10px; color: var(--muted);
+  }
+  .mini b { display: block; color: var(--ink); font-size: 13px; }
+
+  /* — Анализы (экран 1): скан бланка, прогресс, появление результата — */
+  .upload-card, .result-card, .feature-card {
+    border: 1px solid rgba(226, 232, 240, .9);
+    border-radius: 15px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, .06);
+  }
+  .upload-card { padding: 12px; display: grid; gap: 10px; animation: cardPulse 4.6s ease-in-out infinite; }
+  .upload-top { display: flex; align-items: center; gap: 10px; }
+  .file-icon {
+    width: 42px; height: 52px; border-radius: 8px; flex: none;
+    background: linear-gradient(180deg, #fff, #f1f5f9);
+    border: 1px solid var(--line); position: relative; overflow: hidden;
+  }
+  .file-icon:before, .file-icon:after {
+    content: ""; position: absolute; left: 8px; right: 8px; height: 3px;
+    border-radius: 4px; background: #cbd5e1;
+  }
+  .file-icon:before { top: 16px; }
+  .file-icon:after { top: 26px; right: 14px; }
+  .scan-line {
+    position: absolute; left: 4px; right: 4px; height: 3px; border-radius: 4px;
+    background: var(--amber); box-shadow: 0 0 12px rgba(245,158,11,.75);
+    animation: scan 2.2s ease-in-out infinite;
+  }
+  .upload-copy strong { display: block; font-size: 13px; }
+  .upload-copy span { color: var(--muted); font-size: 10px; }
+  .progress { height: 7px; overflow: hidden; border-radius: 999px; background: #e2e8f0; }
+  .progress i {
+    display: block; height: 100%; border-radius: inherit;
+    background: linear-gradient(90deg, var(--teal), var(--teal-2), var(--amber));
+    animation: progress 4.6s ease-in-out infinite;
+  }
+  .result-card {
+    padding: 12px; margin-top: 9px;
+    opacity: 0; transform: translateY(12px);
+    animation: resultIn 4.6s ease-in-out infinite;
+  }
+  .param-row {
+    display: grid; grid-template-columns: 44px 1fr 40px; align-items: center;
+    gap: 7px; padding: 6px 0; border-top: 1px solid #f1f5f9; font-size: 10px;
+  }
+  .param-row:first-of-type { border-top: 0; }
+  .bar { height: 6px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: inherit; }
+  .bar.ok i { width: 54%; background: var(--teal-2); }
+  .bar.warn i { width: 74%; background: var(--amber); }
+  .bar.soft i { width: 42%; background: #60a5fa; }
+  .feature-card { padding: 11px; margin-top: 9px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .feature {
+    min-height: 48px; border-radius: 12px; padding: 8px; background: #f8fafc;
+    display: grid; align-content: center; gap: 2px; font-size: 10px; color: var(--muted);
+  }
+  .feature b { color: var(--ink); font-size: 11px; }
+
+  /* — Звонок и чат (финальный экран) — */
+  .call-row { display: flex; align-items: center; gap: 10px; }
+  .call-ava {
+    width: 40px; height: 40px; border-radius: 50%; flex: none;
+    background: var(--accent-soft); display: grid; place-items: center; font-size: 20px;
+  }
+  .call-actions { display: flex; gap: 16px; justify-content: center; margin-top: 12px; }
+  .call-btn {
+    width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    font-size: 15px; color: #fff; box-shadow: 0 6px 14px rgba(15,23,42,.18);
+  }
+  .call-btn.acc { background: #16a34a; }
+  .call-btn.dec { background: #ef4444; }
+  .bubble {
+    font-size: 11px; padding: 8px 10px; max-width: 86%; line-height: 1.35;
+    background: var(--accent-soft); color: var(--ink);
+    border-radius: 12px 12px 12px 4px;
+  }
+  .bubble.me { background: #f1f5f9; margin-left: auto; margin-top: 6px; border-radius: 12px 12px 4px 12px; }
+
+  /* — Плавающие чипы — */
+  .chip {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.82);
+    box-shadow: 0 12px 22px rgba(15, 23, 42, .08);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    will-change: transform;
+  }
+  .chip b { color: var(--accent); }
+  .chip-1 { top: 326px; left: 18px; animation: floatA 5.2s ease-in-out infinite; }
+  .chip-2 { top: 300px; right: 14px; animation: floatB 5.4s ease-in-out infinite; }
+  .chip-3 { bottom: 150px; left: 10px; animation: floatA 5.8s ease-in-out infinite 300ms; }
+
+  /* — CTA — */
+  .cta {
+    position: absolute;
+    left: 26px;
+    right: 26px;
+    bottom: 30px;
+    min-height: 82px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 22px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 75%, #000 12%));
+    box-shadow: 0 18px 38px color-mix(in srgb, var(--accent) 28%, transparent);
+    z-index: 4;
+  }
+  .story.in .cta {
+    animation: ctaPop 900ms cubic-bezier(.2,.8,.2,1) 1300ms both;
+  }
+  .cta strong { display: block; font-size: 17px; line-height: 1.1; }
+  .cta span { display: block; margin-top: 4px; color: rgba(255,255,255,.78); font-size: 12px; }
+
+  .qr {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid rgba(255,255,255,.36);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, .18);
+    flex: none;
+  }
+  .qr svg { display: block; width: 100%; height: 100%; shape-rendering: crispEdges; }
+
+  /* — Индикатор страниц — */
+  .dots-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 20;
+    pointer-events: none;
+  }
+  .dots-nav i {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(15, 23, 42, .22);
+    transition: width .25s, background .25s;
+  }
+  .dots-nav i.active { width: 22px; background: #0f172a; border-radius: 5px; }
+
+  .swipe-hint {
+    position: fixed;
+    right: 16px; top: 16px;
+    z-index: 20;
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,.8);
+    padding: 6px 11px;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(15,23,42,.08);
+    animation: hintFade 4s ease-in-out 2s forwards;
+  }
+
+  @keyframes phoneEnter {
+    from { opacity: 0; transform: translateX(-50%) translateY(36px) rotate(-8deg) scale(.96); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0) rotate(-3deg) scale(1); }
+  }
+  @keyframes ctaPop {
+    from { opacity: 0; transform: translateY(18px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes floatA {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-11px) rotate(2deg); }
+  }
+  @keyframes floatB {
+    0%, 100% { transform: translateY(0) rotate(2deg); }
+    50% { transform: translateY(10px) rotate(-2deg); }
+  }
+  @keyframes hintFade { to { opacity: 0; visibility: hidden; } }
+  @keyframes scan { 0%, 100% { top: 8px; opacity: .55; } 50% { top: 39px; opacity: 1; } }
+  @keyframes progress { 0% { width: 10%; } 48% { width: 100%; } 100% { width: 100%; } }
+  @keyframes cardPulse { 0%, 100% { transform: scale(1); } 52% { transform: scale(.985); } }
+  @keyframes resultIn { 0%, 38% { opacity: 0; transform: translateY(14px); } 52%, 100% { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 430px) {
+    .story { width: 100vw; max-height: none; height: 100vh; aspect-ratio: auto; box-shadow: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *:before, *:after {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Общий QR-символ на app.vetpodobed.pro (используется во всех CTA) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="qr-vp" viewBox="0 0 25 25">
+      <path fill="#0f172a" d="M0 0h7v1h-7z M8 0h4v1h-4z M13 0h2v1h-2z M18 0h7v1h-7z M0 1h1v1h-1z M6 1h1v1h-1z M10 1h3v1h-3z M14 1h1v1h-1z M16 1h1v1h-1z M18 1h1v1h-1z M24 1h1v1h-1z M0 2h1v1h-1z M2 2h3v1h-3z M6 2h1v1h-1z M8 2h1v1h-1z M12 2h3v1h-3z M18 2h1v1h-1z M20 2h3v1h-3z M24 2h1v1h-1z M0 3h1v1h-1z M2 3h3v1h-3z M6 3h1v1h-1z M9 3h2v1h-2z M13 3h3v1h-3z M18 3h1v1h-1z M20 3h3v1h-3z M24 3h1v1h-1z M0 4h1v1h-1z M2 4h3v1h-3z M6 4h1v1h-1z M9 4h3v1h-3z M14 4h1v1h-1z M18 4h1v1h-1z M20 4h3v1h-3z M24 4h1v1h-1z M0 5h1v1h-1z M6 5h1v1h-1z M8 5h2v1h-2z M13 5h2v1h-2z M18 5h1v1h-1z M24 5h1v1h-1z M0 6h7v1h-7z M8 6h1v1h-1z M10 6h1v1h-1z M12 6h1v1h-1z M14 6h1v1h-1z M16 6h1v1h-1z M18 6h7v1h-7z M9 7h1v1h-1z M12 7h1v1h-1z M14 7h1v1h-1z M0 8h1v1h-1z M2 8h1v1h-1z M6 8h2v1h-2z M9 8h1v1h-1z M11 8h1v1h-1z M15 8h1v1h-1z M19 8h1v1h-1z M22 8h1v1h-1z M24 8h1v1h-1z M1 9h2v1h-2z M4 9h1v1h-1z M7 9h2v1h-2z M10 9h1v1h-1z M12 9h1v1h-1z M15 9h5v1h-5z M21 9h1v1h-1z M23 9h2v1h-2z M4 10h5v1h-5z M10 10h1v1h-1z M12 10h1v1h-1z M14 10h5v1h-5z M20 10h3v1h-3z M24 10h1v1h-1z M4 11h1v1h-1z M7 11h1v1h-1z M9 11h1v1h-1z M11 11h1v1h-1z M16 11h1v1h-1z M21 11h1v1h-1z M0 12h1v1h-1z M3 12h1v1h-1z M6 12h3v1h-3z M11 12h2v1h-2z M15 12h1v1h-1z M18 12h2v1h-2z M24 12h1v1h-1z M1 13h3v1h-3z M5 13h1v1h-1z M9 13h2v1h-2z M15 13h5v1h-5z M23 13h2v1h-2z M0 14h3v1h-3z M4 14h1v1h-1z M6 14h1v1h-1z M9 14h1v1h-1z M11 14h1v1h-1z M13 14h1v1h-1z M15 14h1v1h-1z M17 14h2v1h-2z M21 14h2v1h-2z M24 14h1v1h-1z M4 15h2v1h-2z M7 15h1v1h-1z M9 15h1v1h-1z M11 15h2v1h-2z M14 15h1v1h-1z M16 15h1v1h-1z M19 15h3v1h-3z M0 16h9v1h-9z M12 16h1v1h-1z M15 16h6v1h-6z M23 16h1v1h-1z M8 17h1v1h-1z M10 17h3v1h-3z M16 17h1v1h-1z M20 17h1v1h-1z M24 17h1v1h-1z M0 18h7v1h-7z M8 18h6v1h-6z M16 18h1v1h-1z M18 18h1v1h-1z M20 18h1v1h-1z M24 18h1v1h-1z M0 19h1v1h-1z M6 19h1v1h-1z M10 19h2v1h-2z M15 19h2v1h-2z M20 19h1v1h-1z M24 19h1v1h-1z M0 20h1v1h-1z M2 20h3v1h-3z M6 20h1v1h-1z M10 20h2v1h-2z M14 20h7v1h-7z M23 20h1v1h-1z M0 21h1v1h-1z M2 21h3v1h-3z M6 21h1v1h-1z M9 21h1v1h-1z M11 21h3v1h-3z M16 21h1v1h-1z M20 21h1v1h-1z M22 21h2v1h-2z M0 22h1v1h-1z M2 22h3v1h-3z M6 22h1v1h-1z M8 22h2v1h-2z M11 22h2v1h-2z M16 22h2v1h-2z M19 22h3v1h-3z M23 22h2v1h-2z M0 23h1v1h-1z M6 23h1v1h-1z M15 23h6v1h-6z M0 24h7v1h-7z M8 24h4v1h-4z M16 24h2v1h-2z M21 24h1v1h-1z M24 24h1v1h-1z"/>
+    </symbol>
+  </svg>
+
+  <div class="swipe-hint">Листайте вправо →</div>
+  <div class="dots-nav" aria-hidden="true">
+    <i class="active"></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <div class="deck">
+
+    <!-- ============ 1. АНАЛИЗЫ ============ -->
+    <div class="slide">
+      <main class="story s-analyses" aria-label="Расшифровка анализов">
+        <div class="grain"></div>
+        <header class="top">
+          <div class="logo"><img src="/assets/logo.png" alt=""></div>
+          <div class="brand"><strong>VetPodobed</strong><span>ветеринарный помощник</span></div>
+        </header>
+
+        <section class="headline">
+          <div class="eyebrow">Для кошек и собак</div>
+          <h1>Анализы питомца понятным языком</h1>
+          <p class="sub">Загрузите фото бланка: приложение покажет расшифровку по правилам ветеринарного врача.</p>
+        </section>
+
+        <div class="chip chip-1">Фото → <b>параметры</b></div>
+        <div class="chip chip-2">История и <b>динамика</b></div>
+        <div class="chip chip-3">Вопросы <b>врачу</b></div>
+
+        <section class="phone-wrap">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-screen">
+              <div class="app-head">
+                <div style="display:flex;align-items:center;gap:9px;">
+                  <div class="avatar">🐾</div>
+                  <div><div class="a-title">Добро пожаловать</div><div class="a-sub">здоровье питомца под рукой</div></div>
+                </div>
+                <span class="pill accent">🔔</span>
+              </div>
+
+              <div>
+                <div class="upload-card">
+                  <div class="upload-top">
+                    <div class="file-icon"><span class="scan-line"></span></div>
+                    <div class="upload-copy">
+                      <strong>Распознаём бланк</strong>
+                      <span>ОАК, биохимия, моча</span>
+                    </div>
+                  </div>
+                  <div class="progress"><i></i></div>
+                </div>
+
+                <div class="result-card">
+                  <div class="c-title">Результат анализа <span class="pill ok">готово</span></div>
+                  <div class="param-row"><span>WBC</span><span class="bar warn"><i></i></span><b>выше</b></div>
+                  <div class="param-row"><span>HGB</span><span class="bar ok"><i></i></span><b>норма</b></div>
+                  <div class="param-row"><span>ALT</span><span class="bar soft"><i></i></span><b>следить</b></div>
+                </div>
+
+                <div class="feature-card">
+                  <div class="feature"><b>Дневник</b><span>анализы и назначения</span></div>
+                  <div class="feature"><b>Напоминания</b><span>лекарства и процедуры</span></div>
+                  <div class="feature"><b>Домашний осмотр</b><span>чек-лист симптомов</span></div>
+                  <div class="feature"><b>Консультации</b><span>связь с врачом</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ============ 2. ДОЗИРОВКИ ============ -->
+    <div class="slide">
+      <main class="story s-dose" aria-label="Калькулятор дозировок">
+        <div class="grain"></div>
+        <header class="top">
+          <div class="logo"><img src="/assets/logo.png" alt=""></div>
+          <div class="brand"><strong>VetPodobed</strong><span>ветеринарный помощник</span></div>
+        </header>
+
+        <section class="headline">
+          <div class="eyebrow">Калькулятор доз</div>
+          <h1>Точная доза без ошибок</h1>
+          <p class="sub">Выберите препарат и вес питомца — приложение рассчитает дозу и объём для шприца.</p>
+        </section>
+
+        <div class="chip chip-1">Таблетки и <b>растворы</b></div>
+        <div class="chip chip-2">Кошки и <b>собаки</b></div>
+        <div class="chip chip-3">По <b>показаниям</b></div>
+
+        <section class="phone-wrap">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-screen">
+              <div class="app-head">
+                <div style="display:flex;align-items:center;gap:9px;">
+                  <div class="avatar">💊</div>
+                  <div><div class="a-title">Расчёт дозы</div><div class="a-sub">Синулокс · таблетка 250 мг</div></div>
+                </div>
+                <span class="pill accent">вет</span>
+              </div>
+
+              <div>
+                <div class="card">
+                  <div class="kv"><span class="k">Питомец</span><span class="v">Кошка · 4.2 кг</span></div>
+                  <div class="kv"><span class="k">Показание</span><span class="v">цистит (МВП)</span></div>
+                  <div class="kv"><span class="k">Доза</span><span class="v">12.5 мг/кг</span></div>
+                </div>
+
+                <div class="card">
+                  <div class="c-title">Доза на приём <span class="pill ok">рассчитано</span></div>
+                  <div class="big-result"><span class="num">52</span><span class="unit">мг</span></div>
+                  <div class="hint">≈ ¼ таблетки, либо раствор <b>0.9 мл</b> (шприц 0.1 мл)</div>
+                  <div class="syringe"><i></i></div>
+                  <div class="hint">2 раза в день · курс по назначению врача</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ============ 2. ТЕСТЫ (боль + когнитивные) ============ -->
+    <div class="slide">
+      <main class="story s-tests" aria-label="Оценочные тесты">
+        <div class="grain"></div>
+        <header class="top">
+          <div class="logo"><img src="/assets/logo.png" alt=""></div>
+          <div class="brand"><strong>VetPodobed</strong><span>ветеринарный помощник</span></div>
+        </header>
+
+        <section class="headline">
+          <div class="eyebrow">Оценочные тесты</div>
+          <h1>Заметьте боль и деменцию вовремя</h1>
+          <p class="sub">Шкала боли для кошек (FGS) и когнитивный тест — по простым признакам, без догадок.</p>
+        </section>
+
+        <div class="chip chip-1">Боль по <b>лицу</b></div>
+        <div class="chip chip-2">Тест на <b>деменцию</b></div>
+        <div class="chip chip-3">Когда <b>к врачу</b></div>
+
+        <section class="phone-wrap">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-screen">
+              <div class="app-head">
+                <div style="display:flex;align-items:center;gap:9px;">
+                  <div class="avatar">🐱</div>
+                  <div><div class="a-title">Шкала боли (FGS)</div><div class="a-sub">Feline Grimace Scale</div></div>
+                </div>
+                <span class="pill warn">3/10</span>
+              </div>
+
+              <div>
+                <div class="card">
+                  <div class="fgs-row"><span>Положение ушей</span><span class="dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></div>
+                  <div class="fgs-row"><span>Прищур глаз</span><span class="dots"><i class="dot on"></i><i class="dot hi"></i><i class="dot"></i></span></div>
+                  <div class="fgs-row"><span>Напряжение морды</span><span class="dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></div>
+                  <div class="fgs-row"><span>Положение усов</span><span class="dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></div>
+                  <div class="fgs-row"><span>Положение головы</span><span class="dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></div>
+                  <div class="hint">Сумма ≥ 4 → покажите питомца ветеринару. Парацетамол и ибупрофен токсичны для кошек.</div>
+                </div>
+
+                <div class="card">
+                  <div class="c-title">Когнитивный тест <span class="pill ok">норма</span></div>
+                  <div class="kv"><span class="k">Дезориентация</span><span class="v">нет</span></div>
+                  <div class="kv"><span class="k">Ритм сна</span><span class="v">в норме</span></div>
+                  <div class="kv"><span class="k">Реакция на кличку</span><span class="v">есть</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ============ 3. ДОМАШНИЙ ОСМОТР ============ -->
+    <div class="slide">
+      <main class="story s-exam" aria-label="Домашний осмотр">
+        <div class="grain"></div>
+        <header class="top">
+          <div class="logo"><img src="/assets/logo.png" alt=""></div>
+          <div class="brand"><strong>VetPodobed</strong><span>ветеринарный помощник</span></div>
+        </header>
+
+        <section class="headline">
+          <div class="eyebrow">Домашний осмотр</div>
+          <h1>Проверьте питомца за 5 минут</h1>
+          <p class="sub">17 пунктов методики ветеринара → индекс здоровья и подсказки, что показать врачу.</p>
+        </section>
+
+        <div class="chip chip-1">Слизистые и <b>пульс</b></div>
+        <div class="chip chip-2">Индекс <b>здоровья</b></div>
+        <div class="chip chip-3">Отчёт в <b>PDF</b></div>
+
+        <section class="phone-wrap">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-screen">
+              <div class="app-head">
+                <div style="display:flex;align-items:center;gap:9px;">
+                  <div class="avatar">🩺</div>
+                  <div><div class="a-title">Результат осмотра</div><div class="a-sub">17 пунктов · 9 систем</div></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="card">
+                  <div class="ring-wrap">
+                    <div class="ring">
+                      <svg width="84" height="84" viewBox="0 0 84 84">
+                        <circle cx="42" cy="42" r="36" fill="none" stroke="#e2e8f0" stroke-width="9"/>
+                        <circle cx="42" cy="42" r="36" fill="none" stroke="#16a34a" stroke-width="9"
+                                stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="36"/>
+                      </svg>
+                      <div class="val"><b>84</b><small>из 100</small></div>
+                    </div>
+                    <div class="counts">
+                      <span class="pill ok">норма · 14</span>
+                      <span class="pill warn">следить · 2</span>
+                      <span class="pill bad">тревога · 0</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="sys-row"><span>Слизистые и СНК</span><span class="mk ok">норма</span></div>
+                  <div class="sys-row"><span>Пульс и дыхание</span><span class="mk ok">норма</span></div>
+                  <div class="sys-row"><span>Кожа и шерсть</span><span class="mk warn">следить</span></div>
+                  <div class="sys-row"><span>Глаза, уши, зубы</span><span class="mk ok">норма</span></div>
+                  <div class="hint">👉 Врачу: сухость кожи и залысина на боку — покажите на приёме.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ============ 4. КАЛОРИИ ============ -->
+    <div class="slide">
+      <main class="story s-cal" aria-label="Калькулятор калорий">
+        <div class="grain"></div>
+        <header class="top">
+          <div class="logo"><img src="/assets/logo.png" alt=""></div>
+          <div class="brand"><strong>VetPodobed</strong><span>ветеринарный помощник</span></div>
+        </header>
+
+        <section class="headline">
+          <div class="eyebrow">Калькулятор калорий</div>
+          <h1>Сколько кормить питомца</h1>
+          <p class="sub">Норма калорий в день по весу, возрасту и упитанности. Формулы NRC / FEDIAF.</p>
+        </section>
+
+        <div class="chip chip-1">Норма <b>в день</b></div>
+        <div class="chip chip-2">Оценка <b>по BCS</b></div>
+        <div class="chip chip-3">Идеальный <b>вес</b></div>
+
+        <section class="phone-wrap">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-screen">
+              <div class="app-head">
+                <div style="display:flex;align-items:center;gap:9px;">
+                  <div class="avatar">🍽️</div>
+                  <div><div class="a-title">Норма калорий</div><div class="a-sub">Кошка · 4.2 кг · взрослая</div></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="card">
+                  <div class="cal-hero">
+                    <span class="num">198</span><span class="unit">ккал/день</span>
+                    <div class="cap">RER 154 × коэффициент активности 1.2</div>
+                  </div>
+                  <div class="grid2" style="margin-top:10px;">
+                    <div class="mini"><b>4.0 кг</b>идеальный вес</div>
+                    <div class="mini"><b>≈ 55 г</b>сухого корма</div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="c-title">Упитанность (BCS) <span class="pill warn">6 / 9</span></div>
+                  <div class="bcs">
+                    <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i>
+                  </div>
+                  <div class="hint">Небольшой лишний вес — снизьте калораж на 10–15% и следите за динамикой.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ============ 6. ЗВОНОК И КОНСУЛЬТАЦИЯ (финал + QR) ============ -->
+    <div class="slide">
+      <main class="story s-consult" aria-label="Звонок и консультация врача">
+        <div class="grain"></div>
+        <header class="top">
+          <div class="logo"><img src="/assets/logo.png" alt=""></div>
+          <div class="brand"><strong>VetPodobed</strong><span>ветеринарный помощник</span></div>
+        </header>
+
+        <section class="headline">
+          <div class="eyebrow">Врач на связи</div>
+          <h1>Звонок и консультация с врачом</h1>
+          <p class="sub">Видео- и аудиозвонок или письменная консультация — дипломированный ветеринар ответит и поможет.</p>
+        </section>
+
+        <div class="chip chip-1">Видео и <b>аудио</b></div>
+        <div class="chip chip-2">Письменно <b>в чат</b></div>
+        <div class="chip chip-3">Дипломир. <b>врач</b></div>
+
+        <section class="phone-wrap">
+          <div class="phone-shadow"></div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-screen">
+              <div class="app-head">
+                <div style="display:flex;align-items:center;gap:9px;">
+                  <div class="avatar">👩‍⚕️</div>
+                  <div><div class="a-title">Консультация</div><div class="a-sub">врач · Екатерина Подобед</div></div>
+                </div>
+                <span class="pill ok">онлайн</span>
+              </div>
+
+              <div>
+                <div class="card">
+                  <div class="c-title">Входящий видеозвонок <span class="pill accent">видео</span></div>
+                  <div class="call-row">
+                    <div class="call-ava">👩‍⚕️</div>
+                    <div>
+                      <div style="font-size:12px;font-weight:800;">Екатерина Подобед</div>
+                      <div style="font-size:10px;color:var(--muted);">ветеринарный врач · видео и аудио</div>
+                    </div>
+                  </div>
+                  <div class="call-actions">
+                    <div class="call-btn dec">✕</div>
+                    <div class="call-btn acc">📞</div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="c-title">Письменная консультация</div>
+                  <div class="bubble">Здравствуйте! Пришлите фото анализа — разберём вместе.</div>
+                  <div class="bubble me">Спасибо, отправляю 📎</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="cta">
+          <div><strong>Откройте VetPodobed</strong><span>app.vetpodobed.pro</span></div>
+          <div class="qr" aria-label="QR-код на app.vetpodobed.pro"><svg viewBox="0 0 25 25"><use href="#qr-vp"/></svg></div>
+        </footer>
+      </main>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var deck = document.querySelector('.deck');
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+      var navDots = Array.prototype.slice.call(document.querySelectorAll('.dots-nav i'));
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var current = -1;
+
+      // Перезапуск анимаций вылета БЕЗ reflow — через Web Animations API,
+      // чтобы плавающие чипы не дёргались во время скролла.
+      function activate(idx) {
+        if (idx === current) return;
+        current = idx;
+        var story = slides[idx].querySelector('.story');
+        story.classList.add('in');
+        if (!reduce) {
+          requestAnimationFrame(function () {
+            var els = slides[idx].querySelectorAll('.phone-wrap, .cta');
+            Array.prototype.forEach.call(els, function (el) {
+              el.getAnimations().forEach(function (a) {
+                try { a.currentTime = 0; a.play(); } catch (e) {}
+              });
+            });
+          });
+        }
+        navDots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && e.intersectionRatio >= 0.6) {
+            activate(slides.indexOf(e.target));
+          }
+        });
+      }, { threshold: [0, 0.6, 1] });
+      slides.forEach(function (s) { io.observe(s); });
+
+      // Автолистание с зацикливанием + пауза при ручном взаимодействии
+      var AUTO_MS = 4800, timer = null, resumeT = null;
+      function go(i) { deck.scrollTo({ left: deck.clientWidth * i, behavior: 'smooth' }); }
+      function startAuto() {
+        if (reduce) return;
+        stopAuto();
+        timer = setInterval(function () { go((current + 1) % slides.length); }, AUTO_MS);
+      }
+      function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+      ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(function (ev) {
+        deck.addEventListener(ev, function () {
+          stopAuto();
+          clearTimeout(resumeT);
+          resumeT = setTimeout(startAuto, 9000); // возобновить после 9 с покоя
+        }, { passive: true });
+      });
+      startAuto();
+    })();
+  </script>
+</body>
+</html>
