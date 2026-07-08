@@ -136,7 +136,7 @@ function shell({ title, desc, canonical, ogImage, jsonld, body, ogType = 'websit
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${esc(canonical)}">
 <meta name="theme-color" content="#0f766e">
-<link rel="icon" type="image/png" href="/assets/logo.png">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="120x120" href="/assets/favicon-120.png"><link rel="icon" type="image/png" href="/assets/logo.png">
 <meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="${SITE_NAME}">
 <meta property="og:title" content="${esc(title)}">
